@@ -6,6 +6,7 @@ const moongoose = require('mongoose');
 const morgan = require('morgan');
 const dotenv = require('dotenv').config({ encoding: "latin1" });
 const User = require('./models/user');
+const userRoute = require('./routes/stuff');
 
 moongoose.connect(process.env.MOONGOOSE_KEY,
     {
@@ -33,6 +34,14 @@ app.use(express.json());
 // listen for requests
 app.listen(3000);
 
+/*
+app.post('/signup', (req, res,next) => {
+    console.log(req);
+    // Email
+   
+
+});// signup */
+
 // mongoose & mongo tests
 app.get('/add-user', (req, res) => {
     const user = new User({
@@ -49,30 +58,6 @@ app.get('/add-user', (req, res) => {
         });
 });
 
-
-checkDuplicateUsernameOrEmail = (req, res, next) => {
-    // Username
-// Email
-User.findOne({
-    email: req.body.email
-}).exec((err, user) => {
-    if (err) {
-        res.status(500).send({ message: err });
-        return;
-    }
-
-    if (user) {
-        res.status(400).send({ message: "Failed! Email is already in use!" });
-        return;
-    }
-
-    next();
-});
-
-};
-
-
-
 app.get('/auth/login', (req, res) => {
     delete req.body._id;
     const user = new User({
@@ -88,31 +73,13 @@ app.get('/', (req, res) => {
     // res.send('<p>home page</p>');
     res.sendFile('./views/index.html', { root: __dirname });
 });
-/*
-app.get('/about', (req, res) => {
-  // res.send('<p>about page</p>');
-  res.sendFile('./views/about.html', { root: __dirname });
-});
 
-// redirects
-app.get('/about-us', (req, res) => {
-  res.redirect('/about');
-}); */
 
 // 404 page
 app.use((req, res) => {
     res.status(404).sendFile('./views/404.html', { root: __dirname });
 });
 
+app.use('/api/auth', userRoute);
 
 module.exports = app;
-
-/* moongoose.connect( process.env.MOONGOOSE_KEY,
-    {
-        useNewUrlParser:true,
-        useUnifiedTopology:true
-    }).then(() => 
-        console.log("connexion a mongodb reussi")
-     ).catch(() => 
-        console.log("connexion a mongodùb échoué")
-     );*/

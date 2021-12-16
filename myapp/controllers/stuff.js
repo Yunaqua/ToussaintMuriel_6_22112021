@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
-exports.getAllUser('/all-user', (req, res, next) => {
+exports.getAllUser = (req, res, next) => {
     User.find()
         .then(result => {
             res.send(result);
@@ -10,10 +10,10 @@ exports.getAllUser('/all-user', (req, res, next) => {
             console.log(err);
         });
     next();
-});
+};
 
-
-exports.signup = () => {
+/*
+exports.signup = (req, res, next) => {
 
     // Email
     User.findOne({
@@ -45,7 +45,23 @@ exports.signup = () => {
         next();
     });
 
-};// signup
+};// signup */
+
+exports.signup = (req, res, next) => {
+    console.log(req);
+    bcrypt.hash(req.body.password,10)
+    .then( hash => { 
+        const user = new User({
+            email:req.body.email,
+            password:hash
+        });
+        user.save()
+        .then( () => res.status(201).json({message :" utilisateur crée"}))
+        .catch( error => res.status(400).json({ error}))
+    })
+    .catch( error => res.status(500).json({ error}))
+
+}//signup
 
 exports.login = (req, res, next) => {
 
