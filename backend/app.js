@@ -10,8 +10,9 @@ const dotenv = require('dotenv').config({ encoding: "latin1" });
 const stuffRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
+
 //const path = require('path');
-const cors = require('cors');
+//const cors = require('cors');
 
 
 
@@ -38,9 +39,8 @@ app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);
 
 // 404 page
-app.use((req, res, next) => {
+app.use((req, res) => {
     res.status(404).sendFile('./views/404.html', { root: __dirname });
-    next();
 });
 
 module.exports = app;

@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
-const User = require('../models/user');
+const User = require('../models/User');
 const jwt = require('jsonwebtoken');
-require('dotenv').config({ path: './.env' });
+//require('dotenv').config({ path: './.env' });
 
 
 exports.signup = (req, res, next) => {
@@ -25,7 +25,7 @@ exports.login = (req, res, next) => {
         return res.status(401).json({ error: 'Utilisateur non trouvé !' });
       }
       bcrypt.compare(req.body.password, user.password) //comparaison du mot de passe
-        .then(valid => {ù
+        .then(valid => {
           if (!valid) {
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
           }
