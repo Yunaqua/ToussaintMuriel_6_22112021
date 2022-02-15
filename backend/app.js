@@ -30,6 +30,7 @@ const app = express();
 const cors = require("cors");
 
 app.use(express.json()); //intercerpte les requetes de type json et donne accès au corps de la req
+app.use(bodyParser.json());
 app.use(cors());
 
 app.use((req, res, next) => {
@@ -61,10 +62,8 @@ app.use((req, res, next) => {
     message: 'Objet créé !'
   });
 });*/
-app.use(bodyParser.json());
 
-app.use("/images", express.static(path.join(__dirname, "images")));
-
+app.use('/images', express.static(path.join(__dirname, 'images'))); // dit à Express de gérer la ressource image de manière statique
 
 app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
