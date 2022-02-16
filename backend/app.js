@@ -40,28 +40,6 @@ app.use((req, res, next) => {
   next();
 });
 
-/*app.use('/api/sauces', (req, res, next) => {
-  const sauce = [
-    {
-      userId: "61ed8819235775be6e997648",
-      name: "Sauce fajitas douce",
-      manufacturer: "Old el paso",
-      description: "d",
-      mainPepper: "Poivron",
-      imageUrl: "https://media.houra.fr/ART-IMG-XL/53/05/8410076470553-5.jpg",
-      heat: "1",
-    },
-    
-  ];
-  res.status(200).json(sauce);
-});*/
-
-/*app.post('/api/sauces', (req, res, next) => {
-  console.log(req.body);
-  res.status(201).json({
-    message: 'Objet créé !'
-  });
-});*/
 
 app.use('/images', express.static(path.join(__dirname, 'images'))); // dit à Express de gérer la ressource image de manière statique
 
