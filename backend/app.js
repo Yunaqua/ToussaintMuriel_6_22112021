@@ -6,9 +6,10 @@ const mongoose = require('mongoose');
 const path = require('path');
 //const helmet = require('helmet');
 
+require('dotenv').config();
 
 //const morgan = require('morgan');
-const dotenv = require('dotenv').config({ encoding: "latin1" });
+//const dotenv = require('dotenv').config({ encoding: "latin1" });
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 

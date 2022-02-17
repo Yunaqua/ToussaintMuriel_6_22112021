@@ -11,8 +11,8 @@ const sauceSchema = mongoose.Schema({
   heat: { type: Number, required: true },
   likes: { type: Number, required: false },
   dislikes: { type: Number, required: false },
-  //usersLiked: { type: String<userId>, required: true },
-  //usersDisliked: { type: String<userId>, required: true }
+  usersLiked: { type: [String], required: false },
+  usersDisliked: { type: [String], required: false }
 });
 
 //sauceSchema.plugin(uniqueValidator); // on applique le validateur au modèle

@@ -11,8 +11,8 @@ exports.createSauce = (req, res, next) => {
     ...sauceObject,  //copie les champs de la requete
     imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}` // recupère l'url ou se trouve l'image
 
-  });
-  sauce.save() //enregistre l'objet dans la base
+    });
+    sauce.save() //enregistre l'objet dans la base
     .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
     .catch(error => res.status(400).json({ error, message: 'Objet non enregistré !' }));
 };
@@ -50,7 +50,7 @@ exports.getOneSauce = (req, res, next) => {
 };
 
 
-exports.getAllStuff = (req, res, next) => {
+exports.getAllSauce = (req, res, next) => {
   Sauce.find()
     .then(sauces => res.status(200).json(sauces))
     .catch(error => res.status(400).json({ error }));
