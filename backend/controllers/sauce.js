@@ -5,6 +5,7 @@ const Sauce = require('../models/Sauce');
 const fs = require('fs');//file system
 
 exports.createSauce = (req, res, next) => {
+  console.log(req.body.sauce);
   const sauceObject = JSON.parse(req.body.sauce);
   delete sauceObject._id; //le front envoie en mauvais ID creer automatiquement par mongodb, on retire ce champs avant qu'il ne soit copié
   const sauce = new Sauce({

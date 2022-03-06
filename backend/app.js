@@ -1,5 +1,5 @@
 //------------------------- Creation de l'app------------------------- 
-
+/*
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -15,8 +15,17 @@ const userRoutes = require('./routes/user');
 
 
 //const cors = require('cors');
+*/
+require('dotenv').config();
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const path = require('path');
 
-
+// import des routeurs
+const userRoutes = require('./routes/user');
+const sauceRoutes = require('./routes/sauce');
 
 mongoose.connect(process.env.MOONGOOSE_KEY,
   {
@@ -28,7 +37,7 @@ mongoose.connect(process.env.MOONGOOSE_KEY,
 
 
 const app = express();
-const cors = require("cors");
+//app.use(cors());
 
 app.use(express.json()); //intercerpte les requetes de type json et donne accès au corps de la req
 app.use(bodyParser.json());
