@@ -52,7 +52,8 @@ exports.getOneSauce = (req, res, next) => {
 
 
 exports.getAllSauce = (req, res, next) => {
-  Sauce.find()
+  console.log("test");
+  Sauce.find().sort({likes : -1 })
     .then(sauces => res.status(200).json(sauces))
     .catch(error => res.status(400).json({ error }));
 };
